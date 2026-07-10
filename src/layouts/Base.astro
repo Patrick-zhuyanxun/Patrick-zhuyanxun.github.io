@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+import SocialLinks from "../components/SocialLinks.astro";
+import { profile } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = `${profile.name} ${profile.englishName}`, description = "機電整合工程師，專注於機器人操作、機器視覺與 AI 系統整合。" } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const href = (path: string) => `${base}${path}`;
+---
+
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="wrap site-nav" aria-label="主要導覽">
+        <a class="brand" href={href("")}>{profile.name} <small>{profile.englishName}</small></a>
+        <div class="nav-links">
+          <a href={href("projects/")}><span data-zh>專案</span><span data-en>Projects</span></a>
+          <a href={href("#journey")}><span data-zh>歷程</span><span data-en>Journey</span></a>
+          <a href={href("writing/")}><span data-zh>文章與觀點</span><span data-en>Writing</span></a>
+        </div>
+        <button class="lang-toggle" type="button" aria-label="切換中文與英文">中文 / EN</button>
+      </nav>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <div class="wrap footer-grid"><h2>{profile.name} {profile.englishName}</h2><SocialLinks compact /></div>
+    </footer>
+    <script is:inline>
+      const toggle = document.querySelector(".lang-toggle");
+      const savedLanguage = localStorage.getItem("patrick-site-language");
+      if (savedLanguage === "en") document.body.classList.add("en");
+      toggle?.addEventListener("click", () => {
+        const enabled = document.body.classList.toggle("en");
+        localStorage.setItem("patrick-site-language", enabled ? "en" : "zh");
+      });
+    </script>
+  </body>
+</html>

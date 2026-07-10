@@ -1,0 +1,68 @@
+---
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { categories, projectCategoryNames, projects } from "../../data/site";
+---
+
+<Base title="專案總覽 | 朱彥勳 Patrick Zhu">
+  <main>
+    <section class="wrap archive-intro">
+      <p class="eyebrow">PROJECT ARCHIVE</p>
+      <h1><span data-zh>把做過的系統，整理成能被回顧的脈絡。</span><span data-en>Turning systems I built into a record I can revisit.</span></h1>
+      <p><span data-zh>這裡收錄從機器人、機構、視覺到 AI 的專案紀錄。每張卡片保留影像、技術、責任範圍與後續回顧所需的資料。</span><span data-en>Projects across robotics, mechanisms, vision and AI, each with evidence, technical context, responsibility boundaries and room for review.</span></p>
+    </section>
+
+    <section class="archive">
+      <div class="wrap">
+        <div class="archive-toolbar">
+          <label class="search-box"><Icon name="search" size={20} /><input id="projectSearch" type="search" placeholder="搜尋專案、技術或關鍵字" aria-label="搜尋專案" /></label>
+          <div class="filters" id="filterRow" aria-label="專案分類"><button class="filter" type="button" data-filter="all" aria-pressed="true">全部專案</button>{categories.map((category) => <button class="filter" type="button" data-filter={category.id} aria-pressed="false">{projectCategoryNames[category.id] || category.label}</button>)}</div>
+        </div>
+        <div class="result-bar"><span id="resultCount">顯示 9 / {projects.length} 個專案</span><span>點選卡片查看專案細節</span></div>
+        <div class="project-grid" id="projectGrid">
+          {projects.map((project, index) => <div class:list={["project-listing", { "is-hidden": index >= 9 }]} data-category={[project.category, ...(project.groups || [])].join(" ")} data-search={[project.title, project.shortTitle, project.organization, project.summary, ...(project.tags || [])].join(" ").toLowerCase()}><ProjectCard project={project} featured={index < 2} /></div>)}
+        </div>
+        <div class="empty" id="emptyState">找不到符合目前條件的專案。</div>
+        <button class="load-more is-visible" id="loadMore" type="button">顯示更多專案</button>
+      </div>
+    </section>
+  </main>
+  <script is:inline>
+    const pageSize = 9;
+    let visibleLimit = pageSize;
+    let activeFilter = "all";
+    const cards = Array.from(document.querySelectorAll(".project-listing"));
+    const search = document.querySelector("#projectSearch");
+    const filterRow = document.querySelector("#filterRow");
+    const resultCount = document.querySelector("#resultCount");
+    const emptyState = document.querySelector("#emptyState");
+    const loadMore = document.querySelector("#loadMore");
+
+    const renderProjects = () => {
+      const term = search.value.trim().toLowerCase();
+      const matched = cards.filter((card) => {
+        const matchesCategory = activeFilter === "all" || card.dataset.category.split(" ").includes(activeFilter);
+        return matchesCategory && (!term || card.dataset.search.includes(term));
+      });
+      cards.forEach((card) => card.classList.add("is-hidden"));
+      matched.slice(0, visibleLimit).forEach((card) => card.classList.remove("is-hidden"));
+      resultCount.textContent = matched.length ? `顯示 ${Math.min(visibleLimit, matched.length)} / ${matched.length} 個專案` : "沒有符合的專案";
+      emptyState.classList.toggle("is-visible", matched.length === 0);
+      loadMore.classList.toggle("is-visible", matched.length > visibleLimit);
+      loadMore.textContent = `顯示更多專案（尚有 ${Math.max(matched.length - visibleLimit, 0)} 項）`;
+    };
+
+    filterRow.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-filter]");
+      if (!button) return;
+      activeFilter = button.dataset.filter;
+      visibleLimit = pageSize;
+      filterRow.querySelectorAll("[data-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      renderProjects();
+    });
+    search.addEventListener("input", () => { visibleLimit = pageSize; renderProjects(); });
+    loadMore.addEventListener("click", () => { visibleLimit += pageSize; renderProjects(); });
+    renderProjects();
+  </script>
+</Base>

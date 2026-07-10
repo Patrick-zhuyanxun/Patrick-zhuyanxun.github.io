@@ -1,0 +1,914 @@
+{
+  "categories": [
+    {
+      "id": "flagship",
+      "label": "Flagship",
+      "description": "近期最重要、最適合履歷或研究討論的系統整合專案。"
+    },
+    {
+      "id": "mobile",
+      "label": "Mobile Robotics",
+      "description": "會移動、導航、跟隨或在空間中反應的作品。"
+    },
+    {
+      "id": "ai",
+      "label": "Perception / AI",
+      "description": "辨識、影像處理、模型訓練與判斷方法相關專案。"
+    },
+    {
+      "id": "embedded",
+      "label": "Embedded / Mechanism",
+      "description": "機構、電路、嵌入式控制與早期競賽實作。"
+    },
+    {
+      "id": "software",
+      "label": "Software / Learning",
+      "description": "軟體練習、遊戲、App 與學習型專案。"
+    }
+  ],
+  "scoringDimensions": [
+    "技術深度",
+    "個人主責",
+    "展示成熟度",
+    "回顧價值"
+  ],
+  "projects": [
+    {
+      "id": "sixd-pose-aoi",
+      "title": "次世代檢測：6D 姿態估測結合雙臂瑕疵檢測系統",
+      "shortTitle": "6D 雙臂 AOI",
+      "year": "2024-2025",
+      "category": "flagship",
+      "categoryLabel": "Flagship",
+      "organization": "NYCU / Hucenrotia",
+      "priority": "High priority",
+      "tags": [
+        "6D Pose",
+        "AOI",
+        "PSO",
+        "Synthetic Data",
+        "Dual-arm Robotics"
+      ],
+      "groups": [
+        "flagship",
+        "ai",
+        "manipulation"
+      ],
+      "heroImage": "assets/sixd-pose-01.png",
+      "imageFit": "contain",
+      "images": [
+        {
+          "src": "assets/sixd-pose-01.png",
+          "caption": "6D pose 與 PSO refinement workflow"
+        },
+        {
+          "src": "assets/sixd-pose-02.png",
+          "caption": "姿態校正與瑕疵檢測結果對照"
+        }
+      ],
+      "summary": "面向反光金屬工件的雙臂 AOI 系統，將 6D 姿態估測、瑕疵檢測、座標校正與雙臂檢測流程整合到同一條 pipeline。",
+      "scope": [
+        "團隊建立面向反光金屬工件的雙臂 AOI 系統，結合 6D 姿態估測、YOLOv7 瑕疵檢測與雙臂檢測流程。",
+        "團隊系統測試最高約 95% 檢測準確率並可辨識 1 mm 瑕疵；此量化結果以團隊成果呈現。",
+        "使用 3D CAD 模型產生合成訓練資料，並以 PSO、手眼座標轉換與姿態矩陣計算對接機器人檢測動作。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "6D 姿態估測模型訓練。",
+          "3D CAD 合成資料生成與自動標註流程。",
+          "PSO 姿態校正、手眼座標轉換與相機/物件姿態矩陣計算。",
+          "雙臂檢測流程整合。",
+          "ChatGPT / LINEBot 文字、影像、語音互動介面。"
+        ],
+        "collaborated": [
+          "專案整體為團隊合作，YOLOv7 瑕疵檢測與量化檢測成果以團隊系統成果呈現。"
+        ],
+        "notPrimary": [
+          "動態相機或光源視角規劃尚未確認為本人主責。"
+        ]
+      },
+      "links": [
+        {
+          "label": "Demo",
+          "url": "https://www.youtube.com/watch?v=yD8v5BXIRN0"
+        }
+      ],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "book-retrieval",
+      "title": "生成式 AI 書籍辨識與機器人抓取系統",
+      "shortTitle": "書籍抓取",
+      "year": "2025-now",
+      "category": "flagship",
+      "categoryLabel": "Flagship",
+      "organization": "國立陽明交通大學",
+      "priority": "High priority",
+      "tags": [
+        "Grasping",
+        "Path Planning",
+        "Motion Planning",
+        "ROS 2",
+        "MoveIt MTC",
+        "VLA"
+      ],
+      "groups": [
+        "flagship",
+        "ai",
+        "manipulation"
+      ],
+      "heroImage": "assets/book-retrieval/book-retrieval-04.png",
+      "images": [
+        {
+          "src": "assets/book-retrieval/book-retrieval-02.png",
+          "caption": "圖書館多書架辨識與測試資料"
+        },
+        {
+          "src": "assets/book-retrieval/book-retrieval-04.png",
+          "caption": "手臂與書籍抓取測試場景"
+        },
+        {
+          "src": "assets/book-retrieval/book-retrieval-05.png",
+          "caption": "書籍偵測與抓取流程截圖"
+        }
+      ],
+      "summary": "以書籍定位、語意辨識、抓取姿態、路徑規劃與動作規劃串成的機器人取書系統。",
+      "scope": [
+        "系統目標是讓機器人能依任務指令找到指定書籍，規劃抓取姿態並完成取書動作。",
+        "整體專案包含語音、影像辨識/VLA 溝通、抓取、路徑規劃與手臂動作規劃。",
+        "這是最適合之後擴充成完整研究型 portfolio detail 的專案之一。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "所有跟抓取有關的部分。",
+          "路徑規劃。",
+          "動作規劃。"
+        ],
+        "collaborated": [
+          "與 VLA 影像辨識模型溝通與系統整合。"
+        ],
+        "notPrimary": [
+          "語音部分主要由其他人負責。",
+          "影像辨識部分主要由其他人負責。"
+        ]
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "voice-gripper",
+      "title": "語音識別機械手軟夾控制應用",
+      "shortTitle": "語音軟夾",
+      "year": "2025",
+      "category": "flagship",
+      "categoryLabel": "Flagship",
+      "organization": "國立陽明交通大學",
+      "priority": "High priority",
+      "tags": [
+        "ROS 2",
+        "MoveIt MTC",
+        "PCL",
+        "Whisper",
+        "Qwen3B",
+        "YOLOE"
+      ],
+      "groups": [
+        "flagship",
+        "ai",
+        "manipulation"
+      ],
+      "heroImage": "assets/voice-gripper-01.png",
+      "images": [
+        {
+          "src": "assets/voice-gripper-01.png",
+          "caption": "語音控制軟夾展示環境"
+        },
+        {
+          "src": "assets/voice-gripper-02.png",
+          "caption": "手臂控制與系統執行畫面"
+        }
+      ],
+      "summary": "整合語音指令、物件辨識與 ROS 2 MoveIt MTC，讓機器手可依語音任務規劃抓取動作。",
+      "scope": [
+        "系統整合 OpenAI Whisper、Qwen3B 與 YOLOE，將自然語言任務轉為可執行的抓取目標。",
+        "使用 PCL 點雲轉換生成夾取姿態，並透過 ROS 2 MoveIt MTC 規劃手臂路徑。",
+        "目前紀錄顯示成功率約 90%，整體反應時間約 10 秒。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "ROS 2 通訊設置。",
+          "手臂控制。",
+          "夾取姿態設計。",
+          "夾取流程設計。",
+          "將辨識結果銜接至 MoveIt MTC 手臂路徑。"
+        ],
+        "collaborated": [
+          "團隊整合 OpenAI Whisper、Qwen3B 與 YOLOE 建立語音指令物件辨識系統。"
+        ],
+        "notPrimary": [
+          "語音與影像辨識模型主要由其他成員負責。"
+        ]
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "autonomous-trash-can",
+      "title": "智能垃圾桶 Autonomous Trash Can",
+      "shortTitle": "智能垃圾桶",
+      "year": "2023",
+      "category": "mobile",
+      "categoryLabel": "Mobile Robotics",
+      "organization": "MIT Media Lab CSL UROP",
+      "priority": "Reference",
+      "tags": [
+        "ROS Noetic",
+        "Raspberry Pi",
+        "Arduino",
+        "Navigation",
+        "Mechanism"
+      ],
+      "groups": [
+        "mobile",
+        "embedded",
+        "repo"
+      ],
+      "heroImage": "assets/autonomous-trash-can-01.jpeg",
+      "images": [
+        {
+          "src": "assets/autonomous-trash-can-01.jpeg",
+          "caption": "智能垃圾桶機構外觀"
+        },
+        {
+          "src": "assets/autonomous-trash-can-02.jpeg",
+          "caption": "機構與硬體測試"
+        },
+        {
+          "src": "assets/autonomous-trash-can-04.png",
+          "caption": "控制流程與系統紀錄"
+        }
+      ],
+      "summary": "可由 App 呼叫的自主導航垃圾桶，整合移動底盤、螺紋開蓋機構、Raspberry Pi、Arduino 與 ROS 導航控制。",
+      "scope": [
+        "以 ROS 建立移動控制流程，讓垃圾桶能在環境中自主導航。",
+        "使用 Raspberry Pi 與 Arduino 串接硬體控制。",
+        "機構上包含自動開蓋與整體垃圾桶結構設計。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "垃圾桶機構設計。",
+          "ROS 系統導航控制。",
+          "UROP 心得另補充機構開發與電路設計。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [
+        {
+          "label": "GitHub Repo",
+          "url": "https://github.com/Patrick-zhuyanxun/Autonomous-Trashcan"
+        }
+      ],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "tello-drone-apriltag",
+      "title": "Drone Following using AprilTags",
+      "shortTitle": "Tello Drone",
+      "year": "2024",
+      "category": "mobile",
+      "categoryLabel": "Mobile Robotics",
+      "organization": "個人 / 課程作品",
+      "priority": "Reference",
+      "tags": [
+        "Tello",
+        "AprilTag",
+        "Computer Vision",
+        "Flight Control"
+      ],
+      "groups": [
+        "mobile",
+        "ai",
+        "repo"
+      ],
+      "heroImage": "assets/drone-apriltag-01.png",
+      "images": [
+        {
+          "src": "assets/drone-apriltag-01.png",
+          "caption": "Tello 無人機追蹤 AprilTag 測試"
+        },
+        {
+          "src": "assets/drone-apriltag-02.png",
+          "caption": "飛行控制與追蹤畫面"
+        }
+      ],
+      "summary": "使用 Tello 無人機相機追蹤 AprilTag，將影像中的標籤位置與尺寸變化轉成飛行控制指令。",
+      "scope": [
+        "偵測 AprilTag 在影像中的相對位置。",
+        "將視覺誤差轉換成無人機前後、左右與升降控制。",
+        "作為視覺伺服與空中機器人控制練習。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "無人機控制飛行程式。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [
+        {
+          "label": "GitHub Repo",
+          "url": "https://github.com/Patrick-zhuyanxun/Tello_drone"
+        }
+      ],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "ai-enforcement",
+      "title": "基於 AI 物件辨識之自駕載具科技執法系統",
+      "shortTitle": "AI 科技執法",
+      "year": "2022",
+      "category": "ai",
+      "categoryLabel": "Perception / AI",
+      "organization": "課程 / 團隊作品",
+      "priority": "Reference",
+      "tags": [
+        "YOLOv4",
+        "Autoware",
+        "Object Detection",
+        "Image Processing"
+      ],
+      "groups": [
+        "ai",
+        "repo"
+      ],
+      "heroImage": "assets/original-portfolio/curated/ai-enforcement-vehicle-01.png",
+      "imageFit": "contain",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/ai-enforcement-vehicle-01.png",
+          "caption": "自駕載具科技執法系統架構"
+        }
+      ],
+      "summary": "以自駕載具作為移動感測平台，使用 AI 物件辨識偵測路邊違停車輛並記錄車牌資訊。",
+      "scope": [
+        "以 YOLOv4 進行路邊物件與車輛偵測。",
+        "結合 Autoware 自駕載具環境操作。",
+        "處理影像與判斷方法，輸出科技執法所需資訊。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "資料標註。",
+          "模型訓練。",
+          "判斷方法設計。",
+          "影像處理。",
+          "Autoware 操作。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [
+        {
+          "label": "GitHub Repo",
+          "url": "https://github.com/Patrick-zhuyanxun/YOLOv4_parking_enforcement_system"
+        }
+      ],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "tdk-robot",
+      "title": "第 24 屆 TDK 盃競賽機器人",
+      "shortTitle": "TDK 競賽機器人",
+      "year": "2021",
+      "category": "embedded",
+      "categoryLabel": "Embedded / Mechanism",
+      "organization": "國立台北科技大學",
+      "priority": "Reference",
+      "tags": [
+        "Mechanism",
+        "Competition",
+        "Robot Design"
+      ],
+      "groups": [
+        "embedded"
+      ],
+      "heroImage": "assets/original-portfolio/curated/tdk-robot-01.jpeg",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/tdk-robot-01.jpeg",
+          "caption": "TDK 競賽機器人"
+        },
+        {
+          "src": "assets/original-portfolio/curated/tdk-robot-02.jpeg",
+          "caption": "機構測試與競賽紀錄"
+        }
+      ],
+      "summary": "競賽機器人完成爬坡、夾取道具與開啟垃圾桶蓋等任務，重點在機構穩定性與任務動作設計。",
+      "scope": [
+        "針對競賽任務設計機構。",
+        "完成製作與任務測試。",
+        "培養早期機械設計與競賽實作經驗。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "機構設計。",
+          "製作。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "line-following-car",
+      "title": "循線自走車",
+      "shortTitle": "循線車",
+      "year": "2022",
+      "category": "embedded",
+      "categoryLabel": "Embedded / Mechanism",
+      "organization": "國立台北科技大學",
+      "priority": "Reference",
+      "tags": [
+        "Sensor",
+        "Motor Control",
+        "Embedded"
+      ],
+      "groups": [
+        "embedded"
+      ],
+      "heroImage": "assets/original-portfolio/curated/line-following-car-01.png",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/line-following-car-01.png",
+          "caption": "循線自走車硬體"
+        }
+      ],
+      "summary": "以循線感測器判斷路徑偏差，並使用距離偵測協助車體定位。從零件選型到運動控制的個人實作。",
+      "scope": [
+        "讀取循線感測器與距離感測資料。",
+        "依路徑偏差控制馬達輸出。",
+        "整合硬體與控制程式。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "電路零件選用。",
+          "硬體整合。",
+          "運動控制程式撰寫。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "agri-suspended-robot",
+      "title": "懸吊機器人運用於 AI 農業照護",
+      "shortTitle": "農業懸吊機器人",
+      "year": "2021",
+      "category": "embedded",
+      "categoryLabel": "Embedded / Mechanism",
+      "organization": "國立台北科技大學",
+      "priority": "Reference",
+      "tags": [
+        "Mechanism",
+        "Motor",
+        "Agriculture"
+      ],
+      "groups": [
+        "embedded"
+      ],
+      "heroImage": "assets/original-portfolio/curated/ai-agriculture-suspended-robot-01.jpeg",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/ai-agriculture-suspended-robot-01.jpeg",
+          "caption": "農業懸吊機器人原型"
+        }
+      ],
+      "summary": "四顆馬達與線輪控制相機在作物上方移動，取得作物影像與狀態資訊。",
+      "scope": [
+        "設計懸吊式移動機構。",
+        "以馬達與線輪控制相機位置。",
+        "作為 AI 農業照護資料擷取平台。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "機構設計。",
+          "電路零件選用。",
+          "控制電路。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "reward-vending-machine",
+      "title": "獎勵兌換式自動販賣機",
+      "shortTitle": "販賣機",
+      "year": "2020",
+      "category": "embedded",
+      "categoryLabel": "Embedded / Mechanism",
+      "organization": "國立台北科技大學",
+      "priority": "Archive",
+      "tags": [
+        "Arduino",
+        "LCD",
+        "Keypad"
+      ],
+      "groups": [
+        "embedded"
+      ],
+      "heroImage": "assets/original-portfolio/curated/reward-vending-machine-01.jpeg",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/reward-vending-machine-01.jpeg",
+          "caption": "Arduino 自動販賣機模型"
+        }
+      ],
+      "summary": "Arduino 模擬卡片餘額、薄膜鍵盤輸入、LCD 顯示與商品兌換流程。",
+      "scope": [
+        "建立鍵盤輸入與 LCD 顯示流程。",
+        "模擬卡片餘額與商品兌換。",
+        "完成線路連接與程式控制。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "程式撰寫。",
+          "線路連接。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "lane-detection",
+      "title": "車道線自動辨識",
+      "shortTitle": "車道線辨識",
+      "year": "2019",
+      "category": "ai",
+      "categoryLabel": "Perception / AI",
+      "organization": "國立台北科技大學",
+      "priority": "Archive",
+      "tags": [
+        "OpenCV",
+        "Image Processing",
+        "Lane Detection"
+      ],
+      "groups": [
+        "ai"
+      ],
+      "heroImage": "assets/original-portfolio/curated/lane-detection-01.png",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/lane-detection-01.png",
+          "caption": "車道線偵測結果"
+        }
+      ],
+      "summary": "使用 OpenCV 建立車道線辨識流程，包含灰階化、邊緣偵測、區域遮罩、線段篩選與雜訊過濾。",
+      "scope": [
+        "建立基礎影像處理 pipeline。",
+        "對車道線進行邊緣與線段偵測。",
+        "透過雜訊過濾提升輸出穩定性。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "演算法建立。",
+          "雜訊過濾。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "background-removal",
+      "title": "自動去背填補背景",
+      "shortTitle": "去背填補",
+      "year": "2022",
+      "category": "ai",
+      "categoryLabel": "Perception / AI",
+      "organization": "國立台北科技大學",
+      "priority": "Archive",
+      "tags": [
+        "Image Processing",
+        "Inpainting",
+        "Segmentation"
+      ],
+      "groups": [
+        "ai"
+      ],
+      "heroImage": "assets/original-portfolio/curated/background-removal-05.png",
+      "imageFit": "contain",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/background-removal-05.png",
+          "caption": "去背與背景填補結果"
+        },
+        {
+          "src": "assets/original-portfolio/curated/background-removal-06.png",
+          "caption": "影像處理流程結果"
+        }
+      ],
+      "summary": "傳統影像處理流程，移除指定物體區域並以周圍環境資訊填補背景。",
+      "scope": [
+        "偵測並移除目標物件。",
+        "以周遭背景資訊補齊缺口。",
+        "練習傳統影像處理與程式流程設計。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "程式撰寫。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "cifar10-low-data",
+      "title": "CIFAR10 低資料模型優化",
+      "shortTitle": "CIFAR10",
+      "year": "2022",
+      "category": "ai",
+      "categoryLabel": "Perception / AI",
+      "organization": "國立台北科技大學",
+      "priority": "Archive",
+      "tags": [
+        "Keras",
+        "Deep Learning",
+        "Low-data Training"
+      ],
+      "groups": [
+        "ai"
+      ],
+      "heroImage": "assets/original-portfolio/curated/cifar10-low-data-01.png",
+      "imageFit": "contain",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/cifar10-low-data-01.png",
+          "caption": "CIFAR10 低資料訓練紀錄"
+        },
+        {
+          "src": "assets/original-portfolio/curated/cifar10-low-data-02.png",
+          "caption": "模型結果與分析"
+        }
+      ],
+      "summary": "在僅使用 10,000 筆 CIFAR10 訓練資料的限制下，建構模型並觀察泛化能力。",
+      "scope": [
+        "限制訓練資料量，觀察模型在低資料情境下的表現。",
+        "查找相關文獻並建構模型。",
+        "記錄訓練結果與模型表現。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "建構模型。",
+          "查找相關文獻。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "dqn-2048",
+      "title": "DQN 2048 AI",
+      "shortTitle": "DQN 2048",
+      "year": "2023",
+      "category": "software",
+      "categoryLabel": "Software / Learning",
+      "organization": "個人 / 課程作品",
+      "priority": "Archive",
+      "tags": [
+        "DQN",
+        "Reinforcement Learning",
+        "TensorFlow",
+        "Game AI"
+      ],
+      "groups": [
+        "software",
+        "ai"
+      ],
+      "heroImage": "assets/original-portfolio/curated/dqn-2048-01.png",
+      "imageFit": "contain",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/dqn-2048-01.png",
+          "caption": "DQN 2048 模型架構"
+        },
+        {
+          "src": "assets/original-portfolio/curated/dqn-2048-02.png",
+          "caption": "遊戲與訓練畫面"
+        },
+        {
+          "src": "assets/original-portfolio/curated/dqn-2048-03.png",
+          "caption": "訓練結果紀錄"
+        }
+      ],
+      "summary": "以 2048 遊戲作為強化學習環境，透過 DQN 訓練 AI 選擇移動策略。",
+      "scope": [
+        "撰寫 2048 遊戲環境。",
+        "設計 reward 並訓練 DQN agent。",
+        "測試訓練結果並記錄策略表現。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "建構模型。",
+          "獎勵值設計與測試。",
+          "訓練結果測試。",
+          "遊戲撰寫。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "growing-rice",
+      "title": "Growing Rice",
+      "shortTitle": "Growing Rice",
+      "year": "2021",
+      "category": "software",
+      "categoryLabel": "Software / Learning",
+      "organization": "個人 / 課程作品",
+      "priority": "Archive",
+      "tags": [
+        "Flutter",
+        "UI",
+        "Mobile App"
+      ],
+      "groups": [
+        "software",
+        "repo"
+      ],
+      "heroImage": "assets/original-portfolio/curated/growing-rice-01.png",
+      "imageFit": "contain",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/growing-rice-01.png",
+          "caption": "Growing Rice App UI"
+        },
+        {
+          "src": "assets/original-portfolio/curated/growing-rice-02.jpg",
+          "caption": "鬧鐘與提醒畫面"
+        },
+        {
+          "src": "assets/original-portfolio/curated/growing-rice-03.jpg",
+          "caption": "天氣與狀態畫面"
+        }
+      ],
+      "summary": "Flutter 行動應用，提供鬧鐘與天氣提醒功能，舊作品集中保存 UI 畫面與素材規劃。",
+      "scope": [
+        "建立 App UI 畫面。",
+        "規劃鬧鐘與天氣提醒功能。",
+        "作為早期行動介面設計與 Flutter 練習。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "UI 畫面建構。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [
+        {
+          "label": "GitHub Repo",
+          "url": "https://github.com/Patrick-zhuyanxun/growing_rice"
+        }
+      ],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    },
+    {
+      "id": "chrome-dino",
+      "title": "Chrome 離線小恐龍遊戲",
+      "shortTitle": "Chrome Dino",
+      "year": "2019",
+      "category": "software",
+      "categoryLabel": "Software / Learning",
+      "organization": "個人 / 課程作品",
+      "priority": "Archive",
+      "tags": [
+        "Python",
+        "Pygame",
+        "Game"
+      ],
+      "groups": [
+        "software"
+      ],
+      "heroImage": "assets/original-portfolio/curated/chrome-dino-01.png",
+      "images": [
+        {
+          "src": "assets/original-portfolio/curated/chrome-dino-01.png",
+          "caption": "Chrome Dino 遊戲畫面"
+        },
+        {
+          "src": "assets/original-portfolio/curated/chrome-dino-02.png",
+          "caption": "遊戲執行紀錄"
+        }
+      ],
+      "summary": "Python Pygame 重製 Chrome 離線小恐龍遊戲，實作遊戲迴圈、跳躍、障礙物、碰撞判定與分數。",
+      "scope": [
+        "使用 Pygame 建立遊戲迴圈。",
+        "實作跳躍、障礙物、碰撞判定與分數。",
+        "作為早期 Python 遊戲與互動程式練習。"
+      ],
+      "responsibilities": {
+        "owned": [
+          "程式撰寫。"
+        ],
+        "collaborated": [],
+        "notPrimary": []
+      },
+      "links": [],
+      "score": {
+        "技術深度": "待評分",
+        "個人主責": "待評分",
+        "展示成熟度": "待評分",
+        "回顧價值": "待評分"
+      }
+    }
+  ]
+}

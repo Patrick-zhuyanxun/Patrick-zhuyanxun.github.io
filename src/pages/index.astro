@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import Journey from "../components/Journey.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import { featuredProjects, profile } from "../data/site";
+---
+
+<Base title={`${profile.name} ${profile.englishName} | 機電整合工程師`}>
+  <main>
+    <section class="wrap hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker"><span data-zh>機電整合工程師</span><span data-en>Mechatronics engineer</span></p>
+        <h1><span data-zh>讓機械、電控、視覺與 AI 在真實世界協同運作。</span><span data-en>Building systems where mechanics, control, vision and AI work together.</span></h1>
+        <p><span data-zh>我是朱彥勳，專注於機器人操作、機器視覺與智慧自動化，將演算法整合進能夠實際運作、測試與迭代的系統。</span><span data-en>I'm Patrick Zhu. I work across robotic manipulation, machine vision and intelligent automation, turning algorithms into systems that can be built, tested and improved.</span></p>
+        <div class="actions"><a class="button primary" href="#projects"><span data-zh>查看代表專案</span><span data-en>View selected projects</span> ↓</a><a class="button secondary" href="resume/"><span data-zh>查看履歷</span><span data-en>View resume</span> ↗</a></div>
+        <SocialLinks />
+      </div>
+      <div class="portrait-placeholder"><span><span data-zh>個人照片預留位置</span><span data-en>Portrait placeholder</span></span></div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-head"><h2><span data-zh>代表專案</span><span data-en>Selected projects</span></h2><p><span data-zh>從感知、決策到動作，完整呈現我如何解決實體系統問題。</span><span data-en>From perception and decisions to motion, a record of how I solve physical-system problems.</span></p></div>
+        <div class="project-grid">{featuredProjects.map((project) => <ProjectCard project={project} />)}</div>
+        <div class="project-directory"><p><span data-zh>首頁僅展示代表專案；完整紀錄與細節收錄於專案總覽。</span><span data-en>Only selected work appears here; the complete record lives in the project archive.</span></p><a href="projects/"><span data-zh>查看全部專案</span><span data-en>Explore all projects</span></a></div>
+      </div>
+    </section>
+
+    <Journey />
+
+    <section class="section writing-section" id="writing">
+      <div class="wrap">
+        <div class="section-head"><h2><span data-zh>文章與觀點</span><span data-en>Writing & ideas</span></h2><p><span data-zh>整理閱讀、觀看與實際思考後，值得留下來的觀點。</span><span data-en>Ideas worth keeping after reading, watching and thinking.</span></p></div>
+        <div class="writing-empty"><div><strong><span data-zh>內容尚在整理中</span><span data-en>Notes are being distilled</span></strong><p><span data-zh>文章完成後會從私人知識庫中逐篇選擇發布。</span><span data-en>Selected writing will be published here when it is ready.</span></p></div></div>
+      </div>
+    </section>
+  </main>
+</Base>
