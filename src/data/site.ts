@@ -77,14 +77,25 @@ export const journey = [
     type: "project"
   },
   {
-    dateZh: "2025 年",
-    dateEn: "2025",
+    dateZh: "2024 年 11 月至 2026 年 1 月",
+    dateEn: "Nov 2024 - Jan 2026",
     typeZh: "教學經歷",
     typeEn: "TEACHING",
-    titleZh: "亞太美國學校｜機器人教練與 Python 教師",
-    titleEn: "Pacific American School | Robotics coach and Python teacher",
-    descriptionZh: "指導學生準備國際 VEX 機器人競賽，涵蓋機構設計、電路控制與 Python 程式設計。",
-    descriptionEn: "Guides students preparing for VEX robotics competitions across mechanism design, circuits and Python.",
+    titleZh: "亞太美國學校｜VEX 機器人教練",
+    titleEn: "Pacific American School | VEX Robotics Coach",
+    descriptionZh: "指導學生準備國際 VEX 機器人競賽，涵蓋機構設計、電路控制與程式設計，協助學生取得世界賽資格。",
+    descriptionEn: "Coached students for international VEX Robotics Competition across mechanism design, circuit control and programming; supported qualification for the VEX Robotics World Championship.",
+    type: "experience"
+  },
+  {
+    dateZh: "2025 年 9 月至 2026 年 1 月",
+    dateEn: "Sep 2025 - Jan 2026",
+    typeZh: "教學經歷",
+    typeEn: "TEACHING",
+    titleZh: "亞太美國學校｜Python 教師",
+    titleEn: "Pacific American School | Python Teacher",
+    descriptionZh: "教授學生 Python 程式設計。",
+    descriptionEn: "Taught Python programming to students.",
     type: "experience"
   },
   {
