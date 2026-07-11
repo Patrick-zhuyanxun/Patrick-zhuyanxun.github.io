@@ -35,7 +35,8 @@ export const profile = {
   name: "朱彥勳",
   englishName: "Patrick Zhu",
   email: "Patrickzhu616@gmail.com",
-  github: "https://github.com/Patrick-zhuyanxun"
+  github: "https://github.com/Patrick-zhuyanxun",
+  linkedin: "https://www.linkedin.com/in/patrick-zhu-46991b208/"
 };
 
 export const portfolioData = portfolio as PortfolioData;

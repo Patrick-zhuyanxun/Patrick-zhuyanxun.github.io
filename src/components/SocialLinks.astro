@@ -7,5 +7,5 @@ const { compact = false } = Astro.props;
 <div class:list={["social-links", { compact }]} aria-label="聯絡連結">
   <a href={profile.github} target="_blank" rel="noreferrer"><Icon name="github" />GitHub</a>
   <a href={`mailto:${profile.email}`}><Icon name="mail" />Email</a>
-  <span class="pending" title="待提供 LinkedIn 網址"><Icon name="linkedin" />LinkedIn（待補）</span>
+  <a href={profile.linkedin} target="_blank" rel="noreferrer"><Icon name="linkedin" />LinkedIn</a>
 </div>
