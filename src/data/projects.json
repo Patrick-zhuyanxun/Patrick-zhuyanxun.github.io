@@ -372,7 +372,7 @@
       "images": [
         {
           "src": "assets/original-portfolio/curated/ai-enforcement-vehicle-01.png",
-          "caption": "自駕載具科技執法系統架構"
+          "caption": "Autoware 執法環境與違停車輛辨識結果"
         }
       ],
       "summary": "以自駕載具作為移動感測平台，使用 AI 物件辨識偵測路邊違停車輛並記錄車牌資訊。",
@@ -523,7 +523,11 @@
       "images": [
         {
           "src": "assets/original-portfolio/curated/ai-agriculture-suspended-robot-01.jpeg",
-          "caption": "農業懸吊機器人原型"
+          "caption": "農業懸吊機器人展示原型"
+        },
+        {
+          "src": "assets/original-portfolio/curated/ai-agriculture-suspended-robot-02.jpeg",
+          "caption": "農業照護裝置的控制與感測子系統"
         }
       ],
       "summary": "四顆馬達與線輪控制相機在作物上方移動，取得作物影像與狀態資訊。",
@@ -566,11 +570,11 @@
       "groups": [
         "embedded"
       ],
-      "heroImage": "assets/original-portfolio/curated/reward-vending-machine-01.jpeg",
+      "heroImage": "assets/original-portfolio/curated/reward-vending-machine-01.png",
       "images": [
         {
-          "src": "assets/original-portfolio/curated/reward-vending-machine-01.jpeg",
-          "caption": "Arduino 自動販賣機模型"
+          "src": "assets/original-portfolio/curated/reward-vending-machine-01.png",
+          "caption": "Arduino Mega、RFID、鍵盤與 LCD 配線圖"
         }
       ],
       "summary": "Arduino 模擬卡片餘額、薄膜鍵盤輸入、LCD 顯示與商品兌換流程。",
@@ -612,11 +616,23 @@
       "groups": [
         "ai"
       ],
-      "heroImage": "assets/original-portfolio/curated/lane-detection-01.png",
+      "heroImage": "assets/original-portfolio/curated/lane-detection-04.png",
       "images": [
         {
           "src": "assets/original-portfolio/curated/lane-detection-01.png",
-          "caption": "車道線偵測結果"
+          "caption": "車道線點雲前處理結果"
+        },
+        {
+          "src": "assets/original-portfolio/curated/lane-detection-02.png",
+          "caption": "高速公路原始影像"
+        },
+        {
+          "src": "assets/original-portfolio/curated/lane-detection-03.png",
+          "caption": "車道線點雲偵測結果"
+        },
+        {
+          "src": "assets/original-portfolio/curated/lane-detection-04.png",
+          "caption": "車道線自動標記結果"
         }
       ],
       "summary": "使用 OpenCV 建立車道線辨識流程，包含灰階化、邊緣偵測、區域遮罩、線段篩選與雜訊過濾。",
