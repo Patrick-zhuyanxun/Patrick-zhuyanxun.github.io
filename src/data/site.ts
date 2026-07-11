@@ -34,7 +34,7 @@ type PortfolioData = {
 export const profile = {
   name: "朱彥勳",
   englishName: "Patrick Zhu",
-  email: "Patrickzhu616@gmail.com",
+  email: "patrickzhu616@gmail.com",
   github: "https://github.com/Patrick-zhuyanxun",
   linkedin: "https://www.linkedin.com/in/patrick-zhu-46991b208/"
 };
@@ -65,6 +65,17 @@ export const featuredProjects = featuredProjectIds
 export const projectImage = (path: string) => `/images/projects/${path.replace(/^assets\//, "")}`;
 
 export const journey = [
+  {
+    dateZh: "2026 年 5 月至今",
+    dateEn: "May 2026 - Present",
+    typeZh: "實習經歷",
+    typeEn: "INTERNSHIP",
+    titleZh: "工業技術研究院｜AMR 機器人整合",
+    titleEn: "ITRI | AMR robotics integration",
+    descriptionZh: "於服務科技中心物流運送部門擔任約聘實習生，支援自主移動機器人（AMR）整合相關工作。",
+    descriptionEn: "Contract intern in the Service Systems Technology Center, supporting autonomous mobile robot (AMR) integration work for logistics and transportation applications.",
+    type: "experience"
+  },
   {
     dateZh: "2025 年至今",
     dateEn: "2025 – present",
