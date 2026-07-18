@@ -1,31 +1,45 @@
-# Cloudflare Pages 上線設定
+# Cloudflare Pages 部署設定
 
-## Pages 專案
+## 正式環境
 
-1. 在 Cloudflare Workers & Pages 建立 Pages 專案。
-2. 連接 GitHub Repository `Patrick-zhuyanxun/Patrick-zhuyanxun.github.io`。
-3. Production branch 設為 `main`。
-4. Build command 設為 `pnpm build`。
-5. Build output directory 設為 `dist`。
+- Cloudflare Pages 專案：`yanxunzhu`
+- 正式網址：`https://yanxunzhu.com`
+- Pages 預設網址：`https://yanxunzhu.pages.dev`
+- `www.yanxunzhu.com` 以 301 永久轉址至根網域，並保留路徑與查詢參數。
+- Cloudflare Web Analytics 已對 `yanxunzhu.com` 啟用自動安裝。
+- GitHub Actions 僅負責驗證建置；正式部署由 Cloudflare Pages 管理。
 
-## 建置環境變數
+## 建置設定
 
-| 名稱 | 值 |
+| 項目 | 值 |
+| --- | --- |
+| Production branch | `main` |
+| Build command | `pnpm build` |
+| Build output directory | `dist` |
+| Node.js | `22` |
+| pnpm | `10` |
+
+## 環境變數
+
+| 變數 | 值 |
 | --- | --- |
 | `NODE_VERSION` | `22` |
 | `PNPM_VERSION` | `10` |
 | `ASTRO_TELEMETRY_DISABLED` | `1` |
 
-## 自訂網域
+## 發布流程
 
-1. 在 Pages 專案的 Custom domains 加入 `yanxunzhu.com`。
-2. 加入 `www.yanxunzhu.com`。
-3. 使用 Cloudflare Bulk Redirect，將 `https://www.yanxunzhu.com/*` 永久轉址至 `https://yanxunzhu.com/${1}`，保留路徑與查詢字串。
-4. 確認 SSL 憑證狀態為 Active。
+1. 修改網站原始碼或新增文章。
+2. 將通過本機建置的變更推送至 GitHub `main`。
+3. Cloudflare Pages 自動建立正式版本。
+4. GitHub Actions 同步執行建置驗證，但不發布 GitHub Pages。
 
-## 上線後
+## 上線檢查
 
-- 啟用 Cloudflare Web Analytics。
-- 驗證 `/`, `/writing/`, `/projects/`, `/experience/`, `/resume/`。
-- 驗證 `robots.txt` 與 `sitemap-index.xml`。
-- 確認 Cloudflare 正式部署正常後，停用 `.github/workflows/deploy-pages.yml`。
+- `/`
+- `/writing/`
+- `/projects/`
+- `/experience/`
+- `/resume/`
+- `/robots.txt`
+- `/sitemap-index.xml`
