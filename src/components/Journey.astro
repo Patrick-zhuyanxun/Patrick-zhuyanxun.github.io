@@ -1,5 +1,7 @@
 ---
 import { journey } from "../data/site";
+import ScrollReveal from "./ScrollReveal.astro";
+import TextReveal from "./TextReveal.astro";
 
 interface Props {
   limit?: number;
@@ -15,20 +17,22 @@ const entries = typeof limit === "number" ? journey.slice(0, limit) : journey;
     <div class="section-head journey-head">
       <p class="section-index">04</p>
       <div>
-        <p class="section-label"><span data-zh>走過的路</span><span data-en>Along the way</span></p>
-        <h2><span data-zh>學習、實作與工作的交會。</span><span data-en>Where learning, building and work meet.</span></h2>
+        <p class="section-label"><span data-zh>經歷列表</span><span data-en>EXPERIENCE LIST</span></p>
+        <h2><TextReveal><span data-zh>學歷、研究、實習與教學。</span><span data-en>Education, research, internships and teaching.</span></TextReveal></h2>
       </div>
     </div>
     <div class="timeline">
-      {entries.map((item) => (
-        <details class:list={["timeline-entry", item.type]}>
-          <summary>
-            <span class="timeline-date"><span data-zh>{item.dateZh}</span><span data-en>{item.dateEn}</span></span>
-            <span class="timeline-marker" aria-hidden="true"></span>
-            <span class="timeline-summary"><span class="timeline-type"><span data-zh>{item.typeZh}</span><span data-en>{item.typeEn}</span></span><strong><span data-zh>{item.titleZh}</span><span data-en>{item.titleEn}</span></strong></span>
-          </summary>
-          <p><span data-zh>{item.descriptionZh}</span><span data-en>{item.descriptionEn}</span></p>
-        </details>
+      {entries.map((item, index) => (
+        <ScrollReveal delay={Math.min(index, 6) * 70} class="timeline-reveal">
+          <details class:list={["timeline-entry", item.type]}>
+            <summary>
+              <span class="timeline-date"><span data-zh>{item.dateZh}</span><span data-en>{item.dateEn}</span></span>
+              <span class="timeline-marker" aria-hidden="true"></span>
+              <span class="timeline-summary"><span class="timeline-type"><span data-zh>{item.typeZh}</span><span data-en>{item.typeEn}</span></span><strong><span data-zh>{item.titleZh}</span><span data-en>{item.titleEn}</span></strong></span>
+            </summary>
+            <p><span data-zh>{item.descriptionZh}</span><span data-en>{item.descriptionEn}</span></p>
+          </details>
+        </ScrollReveal>
       ))}
     </div>
     {showLink && (

@@ -8,16 +8,27 @@ interface Props {
   description?: string;
   image?: string;
   article?: boolean;
+  bodyClass?: string;
+  homeNavigation?: boolean;
+  themeColor?: string;
 }
 
 const {
   title = `${profile.name} ${profile.englishName}`,
   description = "朱彥勳的個人網站，整理文章、觀點、工程專案與經歷。",
   image = profile.portrait,
-  article = false
+  article = false,
+  bodyClass = "",
+  homeNavigation = false,
+  themeColor = "#f8f9fa"
 } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const href = (path: string) => `${base}${path}`;
+const currentPath = Astro.url.pathname;
+const isCurrent = (path: string) => path === "/"
+  ? currentPath === "/"
+  : currentPath.startsWith(path);
+const isWriting = currentPath === "/" || currentPath.startsWith("/writing/");
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 const structuredData = {
@@ -38,7 +49,7 @@ const structuredData = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="theme-color" content={themeColor} />
     <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -52,19 +63,39 @@ const structuredData = {
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip-link" href="#main-content">跳至主要內容</a>
     <header class="site-header">
       <nav class="wrap site-nav" aria-label="主要導覽">
         <a class="brand" href={href("")}>{profile.name} <small>{profile.englishName}</small></a>
-        <div class="nav-links">
-          <a href={href("writing/")}><span data-zh>文章與觀點</span><span data-en>Writing</span></a>
-          <a href={href("projects/")}><span data-zh>專案</span><span data-en>Projects</span></a>
-          <a href={href("experience/")}><span data-zh>經歷</span><span data-en>Experience</span></a>
-          <a href={href("resume/")}><span data-zh>履歷</span><span data-en>Resume</span></a>
-        </div>
+        {homeNavigation ? (
+          <div class="nav-links home-nav-links">
+            <a href="#top" data-nav-section="top"><span data-zh>首頁</span><span data-en>Home</span></a>
+            <a href="#featured" data-nav-section="featured"><span data-zh>代表專案</span><span data-en>Featured</span></a>
+            <a href="#all-projects" data-nav-section="all-projects"><span data-zh>全部專案</span><span data-en>Projects</span></a>
+            <a href="#experience" data-nav-section="experience"><span data-zh>經歷</span><span data-en>Experience</span></a>
+            <a href="#about" data-nav-section="about"><span data-zh>關於</span><span data-en>About</span></a>
+          </div>
+        ) : (
+          <div class="nav-links">
+            <a class:list={{ "is-active": isWriting }} href={href("")}><span data-zh>文章</span><span data-en>Writing</span></a>
+            <a class:list={{ "is-active": isCurrent("/projects/") }} href={href("projects/")}><span data-zh>專案</span><span data-en>Projects</span></a>
+            <a class:list={{ "is-active": isCurrent("/experience/") }} href={href("experience/")}><span data-zh>經歷</span><span data-en>Experience</span></a>
+            <a class:list={{ "is-active": isCurrent("/about/") }} href={href("about/")}><span data-zh>關於</span><span data-en>About</span></a>
+            <a class:list={{ "is-active": isCurrent("/resume/") }} href={href("resume/")}><span data-zh>履歷</span><span data-en>Resume</span></a>
+          </div>
+        )}
         <button class="lang-toggle" type="button" aria-label="切換中文與英文">中 / EN</button>
       </nav>
+      {!homeNavigation && (
+        <nav class="mobile-page-nav" aria-label="手機版主要導覽">
+          <a class:list={{ "is-active": isWriting }} href={href("")}><span data-zh>文章</span><span data-en>Writing</span></a>
+          <a class:list={{ "is-active": isCurrent("/projects/") }} href={href("projects/")}><span data-zh>專案</span><span data-en>Projects</span></a>
+          <a class:list={{ "is-active": isCurrent("/experience/") }} href={href("experience/")}><span data-zh>經歷</span><span data-en>Experience</span></a>
+          <a class:list={{ "is-active": isCurrent("/about/") }} href={href("about/")}><span data-zh>關於</span><span data-en>About</span></a>
+          <a class:list={{ "is-active": isCurrent("/resume/") }} href={href("resume/")}><span data-zh>履歷</span><span data-en>Resume</span></a>
+        </nav>
+      )}
     </header>
     <slot />
     <footer class="site-footer">

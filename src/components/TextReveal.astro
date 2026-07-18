@@ -1,0 +1,52 @@
+---
+interface Props {
+  delay?: number;
+  duration?: number;
+  distance?: string;
+  triggerOnce?: boolean;
+  class?: string;
+}
+
+const {
+  delay = 0,
+  duration = 900,
+  distance = "110%",
+  triggerOnce = true,
+  class: className = ""
+} = Astro.props;
+---
+
+<span
+  class:list={["reveal-mask", className]}
+  data-text-reveal
+  data-trigger-once={triggerOnce}
+  style={`--text-delay:${delay}ms;--text-duration:${duration}ms;--text-distance:${distance};`}
+>
+  <span class="reveal-content"><slot /></span>
+</span>
+
+<script>
+  const textTargets = document.querySelectorAll<HTMLElement>("[data-text-reveal]:not([data-reveal-ready])");
+  const reduceTextMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceTextMotion || !("IntersectionObserver" in window)) {
+    textTargets.forEach((target) => target.classList.add("is-visible"));
+  } else {
+    const textObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
+        if (entry.isIntersecting) {
+          target.classList.add("is-visible");
+          if (target.dataset.triggerOnce !== "false") observer.unobserve(target);
+        } else if (target.dataset.triggerOnce === "false") {
+          target.classList.remove("is-visible");
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.1 });
+
+    textTargets.forEach((target) => {
+      target.dataset.revealReady = "true";
+      textObserver.observe(target);
+    });
+  }
+</script>

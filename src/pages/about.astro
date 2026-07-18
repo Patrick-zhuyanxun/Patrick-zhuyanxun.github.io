@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import { about, currentFocus, profile } from "../data/site";
+
+const skills = [
+  "Python", "C / C++", "ROS 1 / ROS 2", "MoveIt", "Open3D", "PCL",
+  "YOLO", "6D Pose", "Raspberry Pi", "Arduino", "SolidWorks", "Linux"
+];
+---
+
+<Base title={`關於 | ${profile.name} ${profile.englishName}`} description="關於朱彥勳的工程背景、關注方向與聯絡方式。">
+  <main id="main-content">
+    <section class="wrap page-intro about-page-intro">
+      <div>
+        <p class="section-label">ABOUT</p>
+        <h1><span data-zh>在機械、電控、視覺<br />與 AI 之間工作。</span><span data-en>Working between mechanics,<br />control, vision and AI.</span></h1>
+        <p><span data-zh>{about.bodyZh}</span><span data-en>{about.bodyEn}</span></p>
+        <SocialLinks />
+      </div>
+      <figure>
+        <img src={profile.portrait} alt={`${profile.name} ${profile.englishName} 個人形象照`} />
+        <figcaption>{profile.name} · {profile.englishName}</figcaption>
+      </figure>
+    </section>
+
+    <section class="section about-focus-section">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="section-label"><span data-zh>近期關注</span><span data-en>CURRENT FOCUS</span></p>
+          <h2><span data-zh>{about.leadZh}</span><span data-en>{about.leadEn}</span></h2>
+        </div>
+        <div class="focus-grid">
+          {currentFocus.map((item) => (
+            <article>
+              <span>{item.index}</span>
+              <h3><span data-zh>{item.labelZh}</span><span data-en>{item.labelEn}</span></h3>
+              <p><span data-zh>{item.descriptionZh}</span><span data-en>{item.descriptionEn}</span></p>
+            </article>
+          ))}
+        </div>
+        <div class="about-skills">
+          <p class="section-label"><span data-zh>工具與技術</span><span data-en>TOOLS & TECHNOLOGIES</span></p>
+          <div class="skill-cloud">{skills.map((skill) => <span>{skill}</span>)}</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

@@ -2,15 +2,19 @@
 import Base from "../../layouts/Base.astro";
 import Icon from "../../components/Icon.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
+import ScrollReveal from "../../components/ScrollReveal.astro";
+import TextReveal from "../../components/TextReveal.astro";
 import { categories, projectCategoryNames, projects } from "../../data/site";
 ---
 
 <Base title="專案總覽 | 朱彥勳 Patrick Zhu">
-  <main>
+  <main id="main-content">
     <section class="wrap archive-intro">
       <p class="eyebrow">PROJECT ARCHIVE</p>
-      <h1><span data-zh>把做過的系統，整理成能被回顧的脈絡。</span><span data-en>Turning systems I built into a record I can revisit.</span></h1>
-      <p><span data-zh>這裡收錄從機器人、機構、視覺到 AI 的專案紀錄。每張卡片保留影像、技術、責任範圍與後續回顧所需的資料。</span><span data-en>Projects across robotics, mechanisms, vision and AI, each with evidence, technical context, responsibility boundaries and room for review.</span></p>
+      <h1><TextReveal><span data-zh>專案</span><span data-en>Projects</span></TextReveal></h1>
+      <ScrollReveal delay={120} class="archive-intro-copy">
+        <p><span data-zh>我做過機器人操作、6D 姿態估測、機器視覺、自主移動與機電整合專案。每個專案頁記錄我負責的部分、使用技術與成果。</span><span data-en>I have worked on robotic manipulation, 6D pose estimation, machine vision, autonomous mobility and mechatronics integration. Each project records my role, technologies and outcomes.</span></p>
+      </ScrollReveal>
     </section>
 
     <section class="archive">
