@@ -1,14 +1,47 @@
-# 個人網站
+# 朱彥勳個人網站
 
-這是朱彥勳的公開個人網站原始碼。第一版包含首頁、專案總覽、專案詳情、履歷入口，以及預留的文章頁。
+Astro 靜態網站，正式網址為 `https://yanxunzhu.com`。
 
-## 維護來源
+## 本機執行
 
-- 專案資料：`../_career_data/outputs/portfolio-html/portfolio-data.js`
-- 專案影像：`../_career_data/outputs/portfolio-html/assets/`
-- 履歷 PDF：`../_career_data/outputs/resume-html/patrick-zhu-resume.pdf`
-- 首頁歷程：`src/data/site.ts`
+```powershell
+pnpm install
+pnpm dev
+```
 
-執行 `pnpm sync:career` 可同步公開需要的專案資料、影像與中文版履歷 PDF；原始 PowerPoint 素材不會複製到公開網站。
+正式建置：
 
-文章在開始公開寫作後，再建立對應的 Markdown 發布流程。公開部署前需設定 GitHub Pages 的網域與 base path。
+```powershell
+pnpm build
+```
+
+## 內容維護
+
+- 個人介紹、近期關注、經歷：`src/data/site.ts`
+- 專案資料：由 `../_career_data/outputs/portfolio-html/portfolio-data.js` 同步
+- 文章：`src/content/writing/*.md` 或 `*.mdx`
+- 中文履歷 PDF：由 `_career_data` 同步至 `public/files/`
+- 視覺規範：`PRODUCT.md`、`DESIGN.md`
+
+同步專案、圖片與履歷：
+
+```powershell
+pnpm sync:career
+```
+
+## 新增文章
+
+複製 `src/content/writing/_template.md`，移除 `draft: true` 或改為 `false` 才會公開。文章可以只使用原始語言，不需建立翻譯版本。
+
+## 部署
+
+GitHub Repository 只保存原始碼。Cloudflare Pages 連接 `main` 分支後自動建置：
+
+- Build command：`pnpm build`
+- Output directory：`dist`
+- Node.js：22
+- pnpm：10
+- 正式網域：`yanxunzhu.com`
+- `www.yanxunzhu.com` 轉址至根網域
+
+完整步驟見 `docs/cloudflare-deployment.md`。

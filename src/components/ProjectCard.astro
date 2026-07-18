@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { project, featured = false } = Astro.props;
-const role = project.responsibilities?.owned?.[0] || "責任內容整理中";
 const summary = project.summary || project.scope?.[0] || "專案摘要整理中";
 const category = projectCategoryNames[project.category] || project.categoryLabel || "專案";
 const href = `${import.meta.env.BASE_URL}projects/${project.id}/`;
@@ -17,14 +16,13 @@ const href = `${import.meta.env.BASE_URL}projects/${project.id}/`;
 <a class:list={["project-card", { featured }]} href={href}>
   <div class:list={["project-media", { contain: project.imageFit === "contain" }]}>
     <img src={projectImage(project.heroImage)} alt={project.shortTitle || project.title} loading="lazy" />
-    <span class="project-badge">{project.priority || "Archive"}</span>
+    <span class="project-number">{project.year}</span>
   </div>
   <div class="project-body">
-    <div class="project-meta"><span class="project-type">{category}</span><span>{project.year}</span></div>
+    <div class="project-meta"><span class="project-type">{category}</span><span>{project.organization || "專案紀錄"}</span></div>
     <h3>{project.title}</h3>
     <p class="project-summary">{summary}</p>
     <div class="tag-list">{project.tags.slice(0, 4).map((tag) => <span class="tag">{tag}</span>)}</div>
-    <div class="project-role"><strong>我主要負責</strong><p>{role}</p></div>
-    <div class="project-footer"><span>{project.organization || "專案紀錄"}</span><span>查看詳情</span></div>
+    <div class="project-footer"><span><span data-zh>專案紀錄</span><span data-en>Project record</span></span><span aria-hidden="true">↗</span></div>
   </div>
 </a>

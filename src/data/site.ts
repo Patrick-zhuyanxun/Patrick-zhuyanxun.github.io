@@ -36,8 +36,41 @@ export const profile = {
   englishName: "Patrick Zhu",
   email: "patrickzhu616@gmail.com",
   github: "https://github.com/Patrick-zhuyanxun",
-  linkedin: "https://www.linkedin.com/in/patrick-zhu-46991b208/"
+  linkedin: "https://www.linkedin.com/in/patrick-zhu-46991b208/",
+  site: "https://yanxunzhu.com",
+  portrait: "/images/profile/portrait-2026.png"
 };
+
+export const about = {
+  leadZh: "我喜歡把剛接觸的新事物拆開理解，再整理成之後能回頭使用的脈絡。",
+  leadEn: "I like taking new ideas apart, understanding how they work, and organizing what remains into something I can revisit.",
+  bodyZh: "我的背景橫跨機械、電控、機器視覺與 AI。除了實作機器人系統，我也持續閱讀、觀看與整理新知；這個網站用來公開其中值得留下的部分。",
+  bodyEn: "My background spans mechanics, control, machine vision and AI. Alongside building robotic systems, I keep reading, watching and organizing new ideas. This site is where I publish the parts worth keeping."
+};
+
+export const currentFocus = [
+  {
+    index: "01",
+    labelZh: "機器人與實體 AI",
+    labelEn: "Robotics & Physical AI",
+    descriptionZh: "關注機器人如何從感知、規劃到動作，在真實環境中完成任務。",
+    descriptionEn: "How robots connect perception, planning and action to complete tasks in the physical world."
+  },
+  {
+    index: "02",
+    labelZh: "AI 與知識工具",
+    labelEn: "AI & Knowledge Tools",
+    descriptionZh: "測試新的 AI 工具，也思考它們如何改變學習、整理與創作的方法。",
+    descriptionEn: "Testing new AI tools and examining how they reshape learning, organization and creative work."
+  },
+  {
+    index: "03",
+    labelZh: "閱讀與生活觀察",
+    labelEn: "Reading & Observations",
+    descriptionZh: "從書籍、影片與日常經驗中，整理能持續影響判斷與生活方式的想法。",
+    descriptionEn: "Ideas from books, videos and everyday experience that continue to shape decisions and ways of living."
+  }
+];
 
 export const portfolioData = portfolio as PortfolioData;
 export const projects = portfolioData.projects;

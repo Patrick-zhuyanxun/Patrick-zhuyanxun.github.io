@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import Journey from "../components/Journey.astro";
+import { profile } from "../data/site";
+---
+
+<Base title={`經歷 | ${profile.name} ${profile.englishName}`} description="朱彥勳的學習、研究、教學與工程實作經歷。">
+  <main id="main-content">
+    <section class="wrap page-intro">
+      <p class="section-label">EXPERIENCE</p>
+      <h1><span data-zh>不是一條直線，<br />而是持續交會的路徑。</span><span data-en>Not a straight line,<br />but paths that keep meeting.</span></h1>
+      <p><span data-zh>從機構設計、機器人競賽與教學，到視覺、控制、AI 與 AMR 整合。點開每個節點可閱讀更完整的工作內容。</span><span data-en>From mechanical design, robotics competitions and teaching to vision, control, AI and AMR integration. Open each point for more context.</span></p>
+    </section>
+    <Journey />
+  </main>
+</Base>

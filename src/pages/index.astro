@@ -1,38 +1,121 @@
 ---
+import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import Journey from "../components/Journey.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import SocialLinks from "../components/SocialLinks.astro";
-import { featuredProjects, profile } from "../data/site";
+import { about, currentFocus, featuredProjects, profile } from "../data/site";
+
+const posts = (await getCollection("writing", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
 ---
 
-<Base title={`${profile.name} ${profile.englishName} | 機電整合工程師`}>
-  <main>
+<Base title={`${profile.name} ${profile.englishName} | 個人網站`} description="朱彥勳的公開個人網站，整理近期關注、文章與觀點，以及機器人與 AI 工程專案。">
+  <main id="main-content">
     <section class="wrap hero" id="top">
       <div class="hero-copy">
-        <p class="kicker"><span data-zh>機電整合工程師</span><span data-en>Mechatronics engineer</span></p>
-        <h1><span data-zh>讓機械、電控、視覺與 AI 在真實世界協同運作。</span><span data-en>Building systems where mechanics, control, vision and AI work together.</span></h1>
-        <p><span data-zh>我是朱彥勳，專注於機器人操作、機器視覺與智慧自動化，將演算法整合進能夠實際運作、測試與迭代的系統。</span><span data-en>I'm Patrick Zhu. I work across robotic manipulation, machine vision and intelligent automation, turning algorithms into systems that can be built, tested and improved.</span></p>
-        <div class="actions"><a class="button primary" href="#projects"><span data-zh>查看代表專案</span><span data-en>View selected projects</span> ↓</a><a class="button secondary" href="resume/"><span data-zh>查看履歷</span><span data-en>View resume</span> ↗</a></div>
+        <p class="hero-name">{profile.name} <span>{profile.englishName}</span></p>
+        <h1>
+          <span data-zh>理解新事物，<br />整理成自己的<br /><em>觀看方式。</em></span>
+          <span data-en>Making sense of<br />new things,<br /><em>in my own way.</em></span>
+        </h1>
+        <p class="hero-intro">
+          <span data-zh>我以工程實作理解世界，也透過閱讀與書寫整理想法。這裡收錄我正在關注的事、逐漸成形的觀點，以及做過的系統。</span>
+          <span data-en>I understand the world by building, reading and writing. This is a record of what I am exploring, the ideas taking shape, and the systems I have built.</span>
+        </p>
+        <div class="actions">
+          <a class="button primary" href="/writing/"><span data-zh>閱讀文章與觀點</span><span data-en>Read writing & ideas</span><span aria-hidden="true">↗</span></a>
+          <a class="button quiet" href="#about"><span data-zh>認識我</span><span data-en>About me</span><span aria-hidden="true">↓</span></a>
+        </div>
         <SocialLinks />
       </div>
-      <img class="portrait" src="/images/profile/portrait-2026.png" alt={`${profile.name} ${profile.englishName}`} />
+      <figure class="hero-portrait">
+        <img src={profile.portrait} alt={`${profile.name} ${profile.englishName} 個人形象照`} />
+        <figcaption><span>TAIWAN</span><span>2026</span></figcaption>
+      </figure>
     </section>
 
-    <section class="section" id="projects">
-      <div class="wrap">
-        <div class="section-head"><h2><span data-zh>代表專案</span><span data-en>Selected projects</span></h2><p><span data-zh>從感知、決策到動作，完整呈現我如何解決實體系統問題。</span><span data-en>From perception and decisions to motion, a record of how I solve physical-system problems.</span></p></div>
-        <div class="project-grid">{featuredProjects.map((project) => <ProjectCard project={project} />)}</div>
-        <div class="project-directory"><p><span data-zh>首頁僅展示代表專案；完整紀錄與細節收錄於專案總覽。</span><span data-en>Only selected work appears here; the complete record lives in the project archive.</span></p><a href="projects/"><span data-zh>查看全部專案</span><span data-en>Explore all projects</span></a></div>
+    <section class="section about-section" id="about">
+      <div class="wrap editorial-grid">
+        <p class="section-index">01</p>
+        <div class="about-copy">
+          <p class="section-label"><span data-zh>關於我</span><span data-en>About</span></p>
+          <h2><span data-zh>{about.leadZh}</span><span data-en>{about.leadEn}</span></h2>
+        </div>
+        <div class="about-body">
+          <p><span data-zh>{about.bodyZh}</span><span data-en>{about.bodyEn}</span></p>
+          <a class="text-link" href="/experience/"><span data-zh>查看我的經歷</span><span data-en>See my journey</span><span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </section>
 
-    <Journey />
+    <section class="section focus-section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="section-index">02</p>
+          <div>
+            <p class="section-label"><span data-zh>近期關注</span><span data-en>Currently exploring</span></p>
+            <h2><span data-zh>最近反覆思考的三個方向。</span><span data-en>Three directions I keep returning to.</span></h2>
+          </div>
+        </div>
+        <div class="focus-list">
+          {currentFocus.map((item) => (
+            <article class="focus-item">
+              <span>{item.index}</span>
+              <h3><span data-zh>{item.labelZh}</span><span data-en>{item.labelEn}</span></h3>
+              <p><span data-zh>{item.descriptionZh}</span><span data-en>{item.descriptionEn}</span></p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
 
     <section class="section writing-section" id="writing">
       <div class="wrap">
-        <div class="section-head"><h2><span data-zh>文章與觀點</span><span data-en>Writing & ideas</span></h2><p><span data-zh>整理閱讀、觀看與實際思考後，值得留下來的觀點。</span><span data-en>Ideas worth keeping after reading, watching and thinking.</span></p></div>
-        <div class="writing-empty"><div><strong><span data-zh>內容尚在整理中</span><span data-en>Notes are being distilled</span></strong><p><span data-zh>文章完成後會從私人知識庫中逐篇選擇發布。</span><span data-en>Selected writing will be published here when it is ready.</span></p></div></div>
+        <div class="section-head">
+          <p class="section-index">03</p>
+          <div>
+            <p class="section-label"><span data-zh>文章與觀點</span><span data-en>Writing & ideas</span></p>
+            <h2><span data-zh>經過消化後，值得公開留下的內容。</span><span data-en>Thoughts worth publishing after they have settled.</span></h2>
+          </div>
+        </div>
+        {posts.length ? (
+          <div class="writing-list">
+            {posts.map((post) => (
+              <a class="writing-row" href={`/writing/${post.id}/`}>
+                <time datetime={post.data.publishedAt.toISOString()}>{post.data.publishedAt.toLocaleDateString("zh-TW")}</time>
+                <div><h3>{post.data.title}</h3><p>{post.data.summary}</p></div>
+                <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="writing-empty">
+            <p class="empty-mark">—</p>
+            <div>
+              <strong><span data-zh>內容正在形成。</span><span data-en>Ideas are taking shape.</span></strong>
+              <p><span data-zh>閱讀、觀看與生活觀察會先留在私人知識庫，整理成熟後才會從這裡公開。</span><span data-en>Notes remain private while they are being processed. Finished pieces will appear here.</span></p>
+            </div>
+          </div>
+        )}
+        <a class="text-link section-link" href="/writing/"><span data-zh>前往文章頁</span><span data-en>Visit writing</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <Journey limit={4} showLink />
+
+    <section class="section projects-section" id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="section-index">05</p>
+          <div>
+            <p class="section-label"><span data-zh>工程實作</span><span data-en>Engineering work</span></p>
+            <h2><span data-zh>專案是我理解技術的另一種方式。</span><span data-en>Projects are another way I make sense of technology.</span></h2>
+          </div>
+        </div>
+        <div class="project-grid featured-grid">{featuredProjects.map((project) => <ProjectCard project={project} />)}</div>
+        <a class="text-link section-link" href="/projects/"><span data-zh>查看全部專案</span><span data-en>Explore all projects</span><span aria-hidden="true">↗</span></a>
       </div>
     </section>
   </main>

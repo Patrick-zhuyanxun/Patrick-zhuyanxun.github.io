@@ -1,0 +1,47 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { profile } from "../../data/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("writing", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<"writing"> };
+const { Content } = await render(post);
+const words = post.body?.trim().split(/\s+/).length || 0;
+const readingMinutes = Math.max(1, Math.ceil(words / 320));
+---
+
+<Base title={`${post.data.title} | ${profile.name}`} description={post.data.summary} image={post.data.cover} article>
+  <main id="main-content">
+    <article class="wrap article-page">
+      <a class="back-link" href="/writing/"><span data-zh>回到文章與觀點</span><span data-en>Back to writing</span></a>
+      <header class="article-header">
+        <div class="article-meta">
+          <time datetime={post.data.publishedAt.toISOString()}>{post.data.publishedAt.toLocaleDateString("zh-TW")}</time>
+          <span>{readingMinutes} MIN READ</span>
+          <span>{post.data.language === "en" ? "EN" : "繁中"}</span>
+        </div>
+        <h1>{post.data.title}</h1>
+        <p>{post.data.summary}</p>
+        <div class="article-tools">
+          <div class="tag-list">{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+          <button class="copy-link" type="button" data-copy-link><span data-zh>複製文章連結</span><span data-en>Copy link</span></button>
+        </div>
+      </header>
+      {post.data.cover && <img class="article-cover" src={post.data.cover} alt="" />}
+      <div class="prose"><Content /></div>
+    </article>
+  </main>
+  <script is:inline>
+    document.querySelector("[data-copy-link]")?.addEventListener("click", async (event) => {
+      await navigator.clipboard.writeText(window.location.href);
+      const button = event.currentTarget;
+      const original = button.textContent;
+      button.textContent = document.body.classList.contains("en") ? "Copied" : "已複製";
+      window.setTimeout(() => { button.textContent = original; }, 1600);
+    });
+  </script>
+</Base>

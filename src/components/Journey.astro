@@ -1,15 +1,26 @@
 ---
 import { journey } from "../data/site";
+
+interface Props {
+  limit?: number;
+  showLink?: boolean;
+}
+
+const { limit, showLink = false } = Astro.props;
+const entries = typeof limit === "number" ? journey.slice(0, limit) : journey;
 ---
 
 <section class="section journey-section" id="journey">
   <div class="wrap">
     <div class="section-head journey-head">
-      <h2><span data-zh>專業歷程</span><span data-en>Professional journey</span></h2>
-      <p><span data-zh>從機構設計與實作出發，逐步把視覺、控制與 AI 整合進真實可運作的系統。</span><span data-en>From mechanical design and hands-on building to systems that unite vision, control and AI.</span></p>
+      <p class="section-index">04</p>
+      <div>
+        <p class="section-label"><span data-zh>走過的路</span><span data-en>Along the way</span></p>
+        <h2><span data-zh>學習、實作與工作的交會。</span><span data-en>Where learning, building and work meet.</span></h2>
+      </div>
     </div>
     <div class="timeline">
-      {journey.map((item) => (
+      {entries.map((item) => (
         <details class:list={["timeline-entry", item.type]}>
           <summary>
             <span class="timeline-date"><span data-zh>{item.dateZh}</span><span data-en>{item.dateEn}</span></span>
@@ -20,5 +31,11 @@ import { journey } from "../data/site";
         </details>
       ))}
     </div>
+    {showLink && (
+      <a class="text-link journey-link" href="/experience/">
+        <span data-zh>查看完整經歷</span><span data-en>View the complete journey</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    )}
   </div>
 </section>
