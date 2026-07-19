@@ -1,6 +1,7 @@
 ---
 import type { Project } from "../data/site";
-import { projectCategoryNames, projectImage } from "../data/site";
+import { projectImage } from "../data/site";
+import { projectCategoryLabels, projectTranslations } from "../data/projectTranslations";
 
 interface Props {
   project: Project;
@@ -9,7 +10,8 @@ interface Props {
 
 const { project, featured = false } = Astro.props;
 const summary = project.summary || project.scope?.[0] || "專案摘要整理中";
-const category = projectCategoryNames[project.category] || project.categoryLabel || "專案";
+const translation = projectTranslations[project.id];
+const category = projectCategoryLabels[project.category] || { zh: project.categoryLabel || "專案", en: project.categoryLabel || "Project" };
 const href = `${import.meta.env.BASE_URL}projects/${project.id}/`;
 ---
 
@@ -19,9 +21,12 @@ const href = `${import.meta.env.BASE_URL}projects/${project.id}/`;
     <span class="project-number">{project.year}</span>
   </div>
   <div class="project-body">
-    <div class="project-meta"><span class="project-type">{category}</span><span>{project.organization || "專案紀錄"}</span></div>
-    <h3>{project.title}</h3>
-    <p class="project-summary">{summary}</p>
+    <div class="project-meta">
+      <span class="project-type"><span data-zh>{category.zh}</span><span data-en>{category.en}</span></span>
+      <span><span data-zh>{project.organization || "專案紀錄"}</span><span data-en>{translation?.organization || project.organization || "Project record"}</span></span>
+    </div>
+    <h3><span data-zh>{project.title}</span><span data-en>{translation?.title || project.title}</span></h3>
+    <p class="project-summary"><span data-zh>{summary}</span><span data-en>{translation?.summary || summary}</span></p>
     <div class="tag-list">{project.tags.slice(0, 4).map((tag) => <span class="tag">{tag}</span>)}</div>
     <div class="project-footer"><span><span data-zh>專案紀錄</span><span data-en>Project record</span></span><span aria-hidden="true">↗</span></div>
   </div>

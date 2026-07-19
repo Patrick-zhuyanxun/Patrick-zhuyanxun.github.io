@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { projectImage, projects, scoringDimensions, type Project } from "../../data/site";
+import { projectCategoryLabels, projectTranslations } from "../../data/projectTranslations";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -12,6 +13,16 @@ export function getStaticPaths() {
 const { project } = Astro.props as { project: Project };
 const responsibilities = project.responsibilities || {};
 const score = project.score || {};
+const translation = projectTranslations[project.id];
+const category = projectCategoryLabels[project.category] || { zh: project.categoryLabel || "專案", en: project.categoryLabel || "Project" };
+const translatedResponsibilities = translation?.responsibilities;
+const scoreLabelsEn: Record<string, string> = {
+  "技術深度": "Technical depth",
+  "個人主責": "Personal ownership",
+  "展示成熟度": "Presentation maturity",
+  "回顧價值": "Review value"
+};
+const scoreValuesEn: Record<string, string> = { "高": "High", "中": "Medium", "低": "Low", "待評分": "Not rated" };
 ---
 
 <Base title={`${project.shortTitle || project.title} | 朱彥勳 Patrick Zhu`}>
@@ -19,37 +30,46 @@ const score = project.score || {};
     <section class:list={["detail-hero", { contain: project.imageFit === "contain" }]}>
       <img src={projectImage(project.heroImage)} alt={project.shortTitle || project.title} />
       <div class="detail-hero-copy">
-        <p class="eyebrow">{project.categoryLabel || "PROJECT"}</p>
-        <h1>{project.title}</h1>
-        <div class="detail-meta"><span>{project.year}</span><span>{project.organization}</span><span>{project.priority || "Project"}</span></div>
+        <p class="eyebrow"><span data-zh>{category.zh}</span><span data-en>{category.en}</span></p>
+        <h1><span data-zh>{project.title}</span><span data-en>{translation?.title || project.title}</span></h1>
+        <div class="detail-meta"><span>{project.year}</span><span><span data-zh>{project.organization}</span><span data-en>{translation?.organization || project.organization}</span></span><span>{project.priority || "Project"}</span></div>
       </div>
     </section>
 
     <div class="wrap detail-page">
       <a class="back-link" href="../"><span data-zh>回到專案總覽</span><span data-en>Back to project archive</span></a>
-      <p class="detail-lead">{project.summary || project.scope?.[0] || "專案摘要整理中"}</p>
+      <p class="detail-lead"><span data-zh>{project.summary || project.scope?.[0] || "專案摘要整理中"}</span><span data-en>{translation?.summary || project.summary || project.scope?.[0] || "Project summary in progress"}</span></p>
 
       <section class="detail-section">
         <h2><span data-zh>專案內容</span><span data-en>Project scope</span></h2>
-        <ul>{(project.scope || []).map((item) => <li>{item}</li>)}</ul>
+        <ul data-zh>{(project.scope || []).map((item) => <li>{item}</li>)}</ul>
+        <ul data-en>{(translation?.scope || project.scope || []).map((item) => <li>{item}</li>)}</ul>
       </section>
 
       <section class="detail-section">
         <h2><span data-zh>我的工作範圍</span><span data-en>My contribution</span></h2>
-        <div class="responsibility-grid">
+        <div class="responsibility-grid" data-zh>
           {responsibilities.owned?.length && <div class="responsibility-block owned"><h3><span data-zh>我主要負責</span><span data-en>Owned</span></h3><ul>{responsibilities.owned.map((item) => <li>{item}</li>)}</ul></div>}
           {responsibilities.collaborated?.length && <div class="responsibility-block collaborated"><h3><span data-zh>我協作的部分</span><span data-en>Collaborated</span></h3><ul>{responsibilities.collaborated.map((item) => <li>{item}</li>)}</ul></div>}
           {responsibilities.notPrimary?.length && <div class="responsibility-block"><h3><span data-zh>非我主要負責</span><span data-en>Not my primary scope</span></h3><ul>{responsibilities.notPrimary.map((item) => <li>{item}</li>)}</ul></div>}
         </div>
+        <div class="responsibility-grid" data-en>
+          {translatedResponsibilities?.owned?.length && <div class="responsibility-block owned"><h3>Owned</h3><ul>{translatedResponsibilities.owned.map((item) => <li>{item}</li>)}</ul></div>}
+          {translatedResponsibilities?.collaborated?.length && <div class="responsibility-block collaborated"><h3>Collaborated</h3><ul>{translatedResponsibilities.collaborated.map((item) => <li>{item}</li>)}</ul></div>}
+          {translatedResponsibilities?.notPrimary?.length && <div class="responsibility-block"><h3>Not my primary scope</h3><ul>{translatedResponsibilities.notPrimary.map((item) => <li>{item}</li>)}</ul></div>}
+        </div>
       </section>
 
-      {project.images?.length && <section class="detail-section"><h2><span data-zh>專案影像</span><span data-en>Project evidence</span></h2><div class="evidence-grid">{project.images.slice(0, 6).map((image) => <figure class="evidence"><img src={projectImage(image.src)} alt={image.caption || project.title} loading="lazy" /><figcaption>{image.caption || "專案影像"}</figcaption></figure>)}</div></section>}
+      {project.images?.length && <section class="detail-section"><h2><span data-zh>專案影像</span><span data-en>Project evidence</span></h2><div class="evidence-grid">{project.images.slice(0, 6).map((image, index) => <figure class="evidence"><img src={projectImage(image.src)} alt={image.caption || project.title} loading="lazy" /><figcaption><span data-zh>{image.caption || "專案影像"}</span><span data-en>Project image {index + 1}</span></figcaption></figure>)}</div></section>}
 
       <section class="detail-section">
         <h2><span data-zh>技術與回顧</span><span data-en>Technology and review</span></h2>
         <div>
           <div class="tag-list">{project.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
-          <dl class="score-list">{scoringDimensions.map((dimension) => <div><dt>{dimension}</dt><dd>{score[dimension] || "待評分"}</dd></div>)}</dl>
+          <dl class="score-list">{scoringDimensions.map((dimension) => {
+            const value = score[dimension] || "待評分";
+            return <div><dt><span data-zh>{dimension}</span><span data-en>{scoreLabelsEn[dimension] || dimension}</span></dt><dd><span data-zh>{value}</span><span data-en>{scoreValuesEn[value] || value}</span></dd></div>;
+          })}</dl>
           {project.links?.length && <div class="project-links">{project.links.map((link) => <a href={link.url} target="_blank" rel="noreferrer">{link.label} ↗</a>)}</div>}
         </div>
       </section>

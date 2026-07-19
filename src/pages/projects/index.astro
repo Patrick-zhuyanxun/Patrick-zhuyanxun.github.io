@@ -4,11 +4,12 @@ import Icon from "../../components/Icon.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import ScrollReveal from "../../components/ScrollReveal.astro";
 import TextReveal from "../../components/TextReveal.astro";
-import { categories, projectCategoryNames, projects } from "../../data/site";
+import { categories, projects } from "../../data/site";
+import { projectCategoryLabels, projectTranslations } from "../../data/projectTranslations";
 ---
 
 <Base title="專案總覽 | 朱彥勳 Patrick Zhu">
-  <main id="main-content">
+  <main id="main-content" class="projects-page">
     <section class="wrap archive-intro">
       <p class="eyebrow">PROJECT ARCHIVE</p>
       <h1><TextReveal><span data-zh>專案</span><span data-en>Projects</span></TextReveal></h1>
@@ -20,15 +21,27 @@ import { categories, projectCategoryNames, projects } from "../../data/site";
     <section class="archive">
       <div class="wrap">
         <div class="archive-toolbar">
-          <label class="search-box"><Icon name="search" size={20} /><input id="projectSearch" type="search" placeholder="搜尋專案、技術或關鍵字" aria-label="搜尋專案" /></label>
-          <div class="filters" id="filterRow" aria-label="專案分類"><button class="filter" type="button" data-filter="all" aria-pressed="true">全部專案</button>{categories.map((category) => <button class="filter" type="button" data-filter={category.id} aria-pressed="false">{projectCategoryNames[category.id] || category.label}</button>)}</div>
+          <label class="search-box"><Icon name="search" size={20} /><input id="projectSearch" type="search" placeholder="搜尋專案、技術或關鍵字" data-placeholder-zh="搜尋專案、技術或關鍵字" data-placeholder-en="Search projects, technologies or keywords" aria-label="搜尋專案" /></label>
+          <div class="filters" id="filterRow" aria-label="專案分類">
+            <button class="filter" type="button" data-filter="all" aria-pressed="true"><span data-zh>全部專案</span><span data-en>All projects</span></button>
+            {categories.map((category) => {
+              const label = projectCategoryLabels[category.id] || { zh: category.label, en: category.label };
+              return <button class="filter" type="button" data-filter={category.id} aria-pressed="false"><span data-zh>{label.zh}</span><span data-en>{label.en}</span></button>;
+            })}
+          </div>
         </div>
-        <div class="result-bar"><span id="resultCount">顯示 9 / {projects.length} 個專案</span><span>點選卡片查看專案細節</span></div>
+        <div class="result-bar">
+          <span><span data-zh id="resultCountZh">顯示 9 / {projects.length} 個專案</span><span data-en id="resultCountEn">Showing 9 / {projects.length} projects</span></span>
+          <span><span data-zh>點選卡片查看專案細節</span><span data-en>Select a card to view project details</span></span>
+        </div>
         <div class="project-grid" id="projectGrid">
-          {projects.map((project, index) => <div class:list={["project-listing", { "is-hidden": index >= 9 }]} data-category={[project.category, ...(project.groups || [])].join(" ")} data-search={[project.title, project.shortTitle, project.organization, project.summary, ...(project.tags || [])].join(" ").toLowerCase()}><ProjectCard project={project} featured={index < 2} /></div>)}
+          {projects.map((project, index) => {
+            const translation = projectTranslations[project.id];
+            return <div class:list={["project-listing", { "is-hidden": index >= 9 }]} data-category={[project.category, ...(project.groups || [])].join(" ")} data-search={[project.title, project.shortTitle, project.organization, project.summary, translation?.title, translation?.organization, translation?.summary, ...(project.tags || [])].join(" ").toLowerCase()}><ProjectCard project={project} featured={index < 2} /></div>;
+          })}
         </div>
-        <div class="empty" id="emptyState">找不到符合目前條件的專案。</div>
-        <button class="load-more is-visible" id="loadMore" type="button">顯示更多專案</button>
+        <div class="empty" id="emptyState"><span data-zh>找不到符合目前條件的專案。</span><span data-en>No projects match these filters.</span></div>
+        <button class="load-more is-visible" id="loadMore" type="button"><span data-zh id="loadMoreZh">顯示更多專案</span><span data-en id="loadMoreEn">Show more projects</span></button>
       </div>
     </section>
   </main>
@@ -39,7 +52,8 @@ import { categories, projectCategoryNames, projects } from "../../data/site";
     const cards = Array.from(document.querySelectorAll(".project-listing"));
     const search = document.querySelector("#projectSearch");
     const filterRow = document.querySelector("#filterRow");
-    const resultCount = document.querySelector("#resultCount");
+    const resultCountZh = document.querySelector("#resultCountZh");
+    const resultCountEn = document.querySelector("#resultCountEn");
     const emptyState = document.querySelector("#emptyState");
     const loadMore = document.querySelector("#loadMore");
 
@@ -51,10 +65,12 @@ import { categories, projectCategoryNames, projects } from "../../data/site";
       });
       cards.forEach((card) => card.classList.add("is-hidden"));
       matched.slice(0, visibleLimit).forEach((card) => card.classList.remove("is-hidden"));
-      resultCount.textContent = matched.length ? `顯示 ${Math.min(visibleLimit, matched.length)} / ${matched.length} 個專案` : "沒有符合的專案";
+      resultCountZh.textContent = matched.length ? `顯示 ${Math.min(visibleLimit, matched.length)} / ${matched.length} 個專案` : "沒有符合的專案";
+      resultCountEn.textContent = matched.length ? `Showing ${Math.min(visibleLimit, matched.length)} / ${matched.length} projects` : "No matching projects";
       emptyState.classList.toggle("is-visible", matched.length === 0);
       loadMore.classList.toggle("is-visible", matched.length > visibleLimit);
-      loadMore.textContent = `顯示更多專案（尚有 ${Math.max(matched.length - visibleLimit, 0)} 項）`;
+      document.querySelector("#loadMoreZh").textContent = `顯示更多專案（尚有 ${Math.max(matched.length - visibleLimit, 0)} 項）`;
+      document.querySelector("#loadMoreEn").textContent = `Show more projects (${Math.max(matched.length - visibleLimit, 0)} remaining)`;
     };
 
     filterRow.addEventListener("click", (event) => {

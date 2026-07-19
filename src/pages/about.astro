@@ -1,47 +1,98 @@
 ---
 import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import ScrollReveal from "../components/ScrollReveal.astro";
 import SocialLinks from "../components/SocialLinks.astro";
-import { about, currentFocus, profile } from "../data/site";
+import TextReveal from "../components/TextReveal.astro";
+import { currentFocus, profile } from "../data/site";
 
-const skills = [
-  "Python", "C / C++", "ROS 1 / ROS 2", "MoveIt", "Open3D", "PCL",
-  "YOLO", "6D Pose", "Raspberry Pi", "Arduino", "SolidWorks", "Linux"
+const skillGroups = [
+  {
+    icon: "code",
+    labelZh: "程式與系統",
+    labelEn: "Programming & Systems",
+    skills: ["Python", "C / C++", "Linux"]
+  },
+  {
+    icon: "robot",
+    labelZh: "機器人與控制",
+    labelEn: "Robotics & Control",
+    skills: ["ROS 1 / ROS 2", "MoveIt", "6D Pose", "LeRobot", "VLA", "Isaac Sim"]
+  },
+  {
+    icon: "vision",
+    labelZh: "視覺與 AI",
+    labelEn: "Vision & AI",
+    skills: ["Open3D", "YOLO", "Coding Agent", "LLM"]
+  },
+  {
+    icon: "cpu",
+    labelZh: "硬體與設計",
+    labelEn: "Hardware & Design",
+    skills: ["Raspberry Pi", "Arduino", "SolidWorks"]
+  }
 ];
 ---
 
-<Base title={`關於 | ${profile.name} ${profile.englishName}`} description="關於朱彥勳的工程背景、關注方向與聯絡方式。">
-  <main id="main-content">
+<Base title={`關於 | ${profile.name} ${profile.englishName}`} description="朱彥勳的背景、研究方向與技術工具。">
+  <main id="main-content" class="about-page">
     <section class="wrap page-intro about-page-intro">
       <div>
         <p class="section-label">ABOUT</p>
-        <h1><span data-zh>在機械、電控、視覺<br />與 AI 之間工作。</span><span data-en>Working between mechanics,<br />control, vision and AI.</span></h1>
-        <p><span data-zh>{about.bodyZh}</span><span data-en>{about.bodyEn}</span></p>
-        <SocialLinks />
+        <h1><TextReveal><span data-zh>我是朱彥勳。</span><span data-en>I am Patrick Zhu.</span></TextReveal></h1>
+        <ScrollReveal delay={140} class="about-intro-copy">
+          <p>
+            <span data-zh>目前就讀國立陽明交通大學電控工程研究所碩士班，主要投入機器人操作、機器視覺與 AI 系統整合。</span>
+            <span data-en>I am pursuing an M.S. at the Institute of Electrical and Control Engineering, National Yang Ming Chiao Tung University, focusing on robotic manipulation, machine vision and AI systems integration.</span>
+          </p>
+          <SocialLinks />
+        </ScrollReveal>
       </div>
-      <figure>
-        <img src={profile.portrait} alt={`${profile.name} ${profile.englishName} 個人形象照`} />
-        <figcaption>{profile.name} · {profile.englishName}</figcaption>
-      </figure>
+      <ScrollReveal delay={220} class="about-portrait-reveal">
+        <figure>
+          <img src={profile.portrait} alt={`${profile.name} ${profile.englishName} 個人形象照`} />
+          <figcaption>{profile.name} · {profile.englishName}</figcaption>
+        </figure>
+      </ScrollReveal>
     </section>
 
     <section class="section about-focus-section">
       <div class="wrap">
         <div class="section-heading">
-          <p class="section-label"><span data-zh>近期關注</span><span data-en>CURRENT FOCUS</span></p>
-          <h2><span data-zh>{about.leadZh}</span><span data-en>{about.leadEn}</span></h2>
+          <p class="section-label"><span data-zh>目前關注</span><span data-en>CURRENT INTERESTS</span></p>
+          <h2><TextReveal><span data-zh>我持續投入的方向</span><span data-en>What I am exploring</span></TextReveal></h2>
         </div>
+
         <div class="focus-grid">
-          {currentFocus.map((item) => (
-            <article>
-              <span>{item.index}</span>
-              <h3><span data-zh>{item.labelZh}</span><span data-en>{item.labelEn}</span></h3>
-              <p><span data-zh>{item.descriptionZh}</span><span data-en>{item.descriptionEn}</span></p>
-            </article>
+          {currentFocus.map((item, index) => (
+            <ScrollReveal delay={index * 100} class="focus-reveal">
+              <article>
+                <span>{item.index}</span>
+                <h3><span data-zh>{item.labelZh}</span><span data-en>{item.labelEn}</span></h3>
+                <p><span data-zh>{item.descriptionZh}</span><span data-en>{item.descriptionEn}</span></p>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
+
         <div class="about-skills">
-          <p class="section-label"><span data-zh>工具與技術</span><span data-en>TOOLS & TECHNOLOGIES</span></p>
-          <div class="skill-cloud">{skills.map((skill) => <span>{skill}</span>)}</div>
+          <div class="skills-heading">
+            <p class="section-label"><span data-zh>工具與技術</span><span data-en>TOOLS & TECHNOLOGIES</span></p>
+            <p><span data-zh>依工作內容分類</span><span data-en>Grouped by how I use them</span></p>
+          </div>
+          <div class="skill-groups">
+            {skillGroups.map((group, index) => (
+              <ScrollReveal delay={index * 90} class="skill-group-reveal">
+                <section class="skill-group">
+                  <div class="skill-group-heading">
+                    <span class="skill-icon"><Icon name={group.icon} size={19} /></span>
+                    <h3><span data-zh>{group.labelZh}</span><span data-en>{group.labelEn}</span></h3>
+                  </div>
+                  <div class="skill-cloud">{group.skills.map((skill) => <span>{skill}</span>)}</div>
+                </section>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
